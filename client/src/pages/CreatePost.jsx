@@ -5,6 +5,10 @@ import { preview } from '../assets'
 import { getRandomPrompt} from '../utils'
 import { FormField, Loader } from '../components'
 
+
+// Definiendo el functional component Create Post, con un objeto vacío. 
+// Usamos useNavigate para poder navegar programáticamente (entre links)
+// useState para almacenar los valores del formulario name, prompt y photo
 const CreatePost = () => {
     const navigate = useNavigate()
     const [form, setForm] = useState({
@@ -13,8 +17,17 @@ const CreatePost = () => {
         photo: ''
     })
 
+    // Generar imagen useState para saber si estamos generando en este momento la imagen, lo seteamos en automático en falso para que cuando demos click sea verdadero. 
+    // Al igual que el loading, para controlar si se está cargando la publicación en ese momento.
     const [generatingImg, setGeneratingImg] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    // Función generateImage: 
+    // Esta función se encarga de generar una imagen utilizando el API externa de OpenAI en función del prompt proporcionado en el formulario.
+    // Si el prompt en el formulario no está vacío, realiza una solicitud POST a una URL usando fetch.
+    // Si la solicitud tiene éxito, actualiza el estado form con la imagen generada.
+    // Si ocurre algún error, muestra una alerta.
+    // Finalmente, restablece el estado generatingImg
     const generateImage = async () => {
         if(form.prompt) {
             try {
@@ -38,6 +51,12 @@ const CreatePost = () => {
             alert('Please enter a prompt')
         }
     }
+
+    // Función handleSubmit: 
+    // Si tanto el prompt como la imagen están presentes en el formulario, realiza una solicitud POST para compartir la publicación.
+    // Si la solicitud tiene éxito, navega de regreso a la página de inicio.
+    // Si ocurre algún error, muestra una alerta.
+    // Finalmente, restablece el estado loading.
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -64,14 +83,23 @@ const CreatePost = () => {
             alert('Please enter a prompt and generate an image')
         }
     }
+
+    // Actualiza el estado form cuando los valores de los campos del formulario cambian.
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value})
     }
+
+    // Utiliza la función getRandomPrompt para obtener un prompt aleatorio basado en el prompt actual en el formulario.
     const handleSurpriseMe = () => {
         const randomPrompt = getRandomPrompt(form.prompt)
         setForm({ ...form, prompt: randomPrompt})
     }
     
+// Renderiza una sección que contiene el contenido del formulario.
+// Incluye campos para el nombre, el prompt y la imagen.
+// Muestra una vista previa de la imagen generada o una imagen de vista previa estática si aún no se ha generado una imagen.
+// Muestra botones para generar una imagen y para compartir la publicación.
+// Utiliza estados (generatingImg y loading) para mostrar mensajes dinámicos en los botones.
   return (
     <section className='mx-auto max-w-7xl'>
          <div>

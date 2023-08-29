@@ -10,3 +10,5 @@ const Loader = () => (
 );
 
 export default Loader;
+
+// Este componente Loader muestra un indicador de carga en forma de "spinner" SVG. El "spinner" es una representación visual que se utiliza comúnmente para indicar que una operación está en progreso, como la carga de datos o procesamiento asíncrono.

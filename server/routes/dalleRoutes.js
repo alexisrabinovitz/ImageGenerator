@@ -17,6 +17,11 @@ router.route('/').get((req, res) => {
     res.send('Hello from dalle')
 })
 
+// Dentro del controlador, obtiene el texto de la descripción de la imagen (prompt) del cuerpo de la solicitud (req.body).
+// Utiliza la instancia de OpenAIApi para crear una imagen utilizando el método createImage().
+// Se especifica el prompt, la cantidad n de imágenes a generar (en este caso, 1), el tamaño deseado de la imagen (size), y el formato de respuesta (response_format).
+// Extrae la imagen generada del resultado y la envía como respuesta en un objeto JSON.
+
 router.route('/').post(async (req, res) => {
     try {
         const { prompt } = req.body

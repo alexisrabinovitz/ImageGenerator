@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { download } from '../assets'
 import { downloadImage } from '../utils'
 
+// La tarjeta tiene una imagen de fondo (photo) y muestra un overlay al pasar el ratón sobre ella.
+// El overlay es un contenedor que contiene la descripción (prompt), el nombre del autor (name) y un botón de descarga.
+// Cuando se hace clic en el botón de descarga, se llama a la función downloadImage(_id, photo), función que se definió en utils.
 const Card = ({_id, name, prompt, photo}) => {
   return (
     <div className='relative rounded-xl group shadow-card hover:shadow-cardhover card'>
@@ -27,6 +30,8 @@ const Card = ({_id, name, prompt, photo}) => {
     </div>
   )
 }
+
+// Declara las propiedades esperadas para el componente Card utilizando PropTypes. Espera un _id (identificador único), un name (nombre), un prompt (prompt o descripción) y una photo (URL de la imagen).
 
 Card.propTypes = {
   _id: PropTypes.string.isRequired,

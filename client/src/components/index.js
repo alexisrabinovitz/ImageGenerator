@@ -7,3 +7,5 @@ export {
     FormField,
     Loader
 }
+
+// Juntamos todos los componentntes en un solo index para exportarlos en un solo archivo

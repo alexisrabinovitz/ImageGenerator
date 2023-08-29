@@ -2,14 +2,10 @@ import React, {useState, useEffect} from 'react'
 import {Loader, Card, FormField} from '../components'
 import PropTypes from 'prop-types'
 
-// const RenderCards = ({data, title}) => {
-//     if(data?.length > 0) {
-//     return data.map((post) => <Card key={post._id} {...post}/> )
-//     } 
-//     return (
-//         <h2 className='mt-5 font-bold text-[#6449ff] text-xl uppercase'>{title}</h2>
-//     )
-// } 
+// Función RenderCards:
+// Esta función toma dos propiedades: data (una matriz de objetos) y title (un título).
+// Si hay datos en la matriz data, mapea los elementos de la matriz y renderiza un componente Card para cada uno.
+// Si no hay datos, muestra el título proporcionado en un encabezado h2.
 
 const RenderCards = ({data, title}) => {
   if (data?.length > 0) {
@@ -24,6 +20,16 @@ RenderCards.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object), // Assuming each post is an object
   title: PropTypes.string.isRequired,
 };
+
+// loading: Estado para controlar si se están cargando los datos.
+// allPosts: Estado para almacenar todas las publicaciones.
+// searchText: Estado para almacenar el texto de búsqueda introducido por el usuario.
+// searchedResults: Estado para almacenar los resultados de búsqueda filtrados.
+// searchTimeout: Estado para almacenar el tiempo de espera antes de realizar la búsqueda.
+// Función fetchPosts:
+// Realiza una solicitud GET para obtener las publicaciones desde la API.
+// Actualiza el estado allPosts con los datos obtenidos.
+// Efecto useEffect: Llama a fetchPosts cuando el componente se monta para obtener las publicaciones iniciales.
 
 const Home = () => {
     const [loading, setLoading] = useState(false)
@@ -57,17 +63,12 @@ const Home = () => {
         fetchPosts()
     }, [])
 
-//    const handleSearchChange = (e) => {
-//         clearTimeout(searchTimeout)
-//         setSearchText(e.target.value)
-    
-//         setSearchTimeout(
-//           setTimeout(() => {
-//             const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()))
-//             setSearchedResults(searchResult)
-//           }, 500),
-//         )
-//       }
+
+  // Función handleSearchChange:
+  // Maneja los cambios en el campo de búsqueda.
+  // Limpia el temporizador de búsqueda anterior y establece el nuevo valor de búsqueda.
+  // Inicia un temporizador para realizar una búsqueda después de un breve retraso.
+  // Filtra las publicaciones basadas en el valor de búsqueda y actualiza searchedResults.
 
 const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
@@ -86,8 +87,11 @@ const handleSearchChange = (e) => {
     );
   };
 
-   
-
+// Renderiza una sección que contiene el contenido de la página.
+// Incluye un campo de entrada de búsqueda (FormField) que permite a los usuarios buscar publicaciones.
+// Si loading es verdadero, muestra un componente Loader mientras se cargan los datos.
+// Si hay un valor en searchText, muestra un mensaje de búsqueda.
+// Renderiza las publicaciones usando el componente RenderCards, mostrando los resultados de búsqueda o un mensaje si no hay resultados.
   return (
     <section className='mx-auto max-w-7xl'>
         <div>
